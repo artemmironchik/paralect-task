@@ -1,4 +1,4 @@
-import { Flex, createStyles } from '@mantine/core';
+import { Flex, Loader, createStyles } from '@mantine/core';
 import VacancyCard from '../vacancyCard/VacancyCard';
 import { VacanciesResponse } from '../../types/types';
 
@@ -44,7 +44,7 @@ export default function VacanciesList({ page, isLoading }: VacanciesListProps) {
 
   return (
     <Flex className={classes.flex}>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <Loader variant="dots" />}
       {!isLoading && !page?.objects.length && <div>Not found</div>}
       {!isLoading &&
         !!page?.objects.length &&

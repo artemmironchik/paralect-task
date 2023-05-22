@@ -31,7 +31,7 @@ export type AuthResponse = {
 };
 
 export type SearchParams = {
-  page: string;
+  page: number;
   count: number;
   keyword?: string;
   payment_from?: string;
