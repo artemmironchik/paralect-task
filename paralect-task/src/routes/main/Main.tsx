@@ -1,28 +1,61 @@
-import { Link } from 'react-router-dom';
+import { createStyles } from '@mantine/core';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import SearchInput from '../../components/searchInput/SearchInput';
+import VacanciesList from '../../components/vacanciesList/VacanciesList';
+import { getVacancies } from '../../services/VacanciesService';
+import { VacanciesResponse } from '../../types/types';
+
+const useStyles = createStyles((theme) => ({}));
 
 export default function Main() {
+  const { classes } = useStyles();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [searchValue, setSearchValue] = useState(localStorage.getItem('keyword') || '');
+  const [currentValue, setCurrentValue] = useState(localStorage.getItem('keyword') || '');
+  const [page, setPage] = useState<VacanciesResponse | null>(null);
+  const [pageNum, setPageNum] = useState(localStorage.getItem('page') || '0');
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const getPage = async () => {
+      setIsLoading(true);
+      const currentPage = await getVacancies({ page: pageNum, count: 4, keyword: searchValue });
+      setPage(currentPage);
+      setIsLoading(false);
+    };
+    getPage();
+  }, [pageNum, searchValue]);
+
+  const handleSearch = (): void => {
+    const params: {
+      keyword?: string;
+    } = {};
+    setSearchValue(currentValue);
+    localStorage.setItem('keyword', currentValue);
+
+    if (currentValue) params.keyword = currentValue;
+    else searchParams.delete('keyword');
+
+    setSearchParams({
+      ...params,
+      ...searchParams,
+      page: '0',
+    });
+  };
+
+  const handleSearchValue = (value: string) => {
+    setCurrentValue(value);
+  };
   return (
-    <div className="m-auto text-center">
-      <h2 className="pb-2 text-4xl">Welcome to my page !</h2>
-      <h3 className="pb-8 text-2xl">Choose the page you would like to visit</h3>
-      <div className="flex justify-center gap-24 pb-12 text-xl">
-        <Link
-          to="/users"
-          className="text-white bg-black rounded-xl py-2 px-4 cursor-pointer transition duration-1000 ease-out hover:-translate-y-1"
-        >
-          Users
-        </Link>
-        <Link
-          to="/albums"
-          className="text-white bg-black rounded-xl py-2 px-4 cursor-pointer transition duration-1000 ease-out hover:-translate-y-1"
-        >
-          Albums
-        </Link>
-      </div>
-      <p className="text-xl">
-        P.S. There should be many pages to choose but I was too lazy to make other pages so pretend
-        like there are
-      </p>
-    </div>
+    <>
+      <SearchInput
+        value={currentValue}
+        handleSearchValue={handleSearchValue}
+        handleSearch={handleSearch}
+      />
+      <VacanciesList page={page} isLoading={isLoading} />
+    </>
   );
 }

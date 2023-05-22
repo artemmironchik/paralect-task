@@ -24,10 +24,10 @@ const useStyles = createStyles((theme) => ({
 
   dropdown: {
     position: 'absolute',
-    top: rem(60),
+    top: rem(85),
     left: 0,
     right: 0,
-    zIndex: 0,
+    zIndex: 10,
     borderTopRightRadius: 0,
     borderTopLeftRadius: 0,
     borderTopWidth: 0,
@@ -44,6 +44,10 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     height: '100%',
     maxWidth: '69rem',
+
+    [theme.fn.smallerThan('sm')]: {
+      justifyContent: 'space-between',
+    },
   },
 
   logoContainer: {
@@ -51,6 +55,10 @@ const useStyles = createStyles((theme) => ({
     justifyContent: 'initial',
     alignItems: 'center',
     marginRight: '265px',
+
+    [theme.fn.smallerThan('sm')]: {
+      marginRight: '0',
+    },
   },
 
   logoImg: {},
@@ -107,32 +115,15 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
     isActive ? [classes.link, classes.linkActive].join(' ') : classes.link;
 
   const items = links.map((link) => (
-    <NavLink
-      key={link.link}
-      to={link.link}
-      className={setActive}
-      // onClick={() =>
-      //   dispatch(
-      //     setParamsState({
-      //       page: undefined,
-      //       count: "4",
-      //       keyword: undefined,
-      //       catalogues: undefined,
-      //       payment_from: undefined,
-      //       payment_to: undefined,
-      //       published: "1",
-      //     }),
-      //   )
-      // }
-    >
+    <NavLink key={link.link} to={link.link} className={setActive}>
       {link.label}
     </NavLink>
   ));
 
   return (
-    <Header height={rem(85)} mb={120} className={classes.root}>
+    <Header className={classes.root} height={85}>
       <Container className={classes.header}>
-        <Flex gap="sm" className={classes.logoContainer}>
+        <Flex className={classes.logoContainer} gap="sm">
           <Image src={logo} className={classes.logoImg} />
           <Text className={classes.logoName}>Jobored</Text>
         </Flex>
