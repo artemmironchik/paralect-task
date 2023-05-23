@@ -4,7 +4,10 @@ import search from '../../assets/icons/Search.svg';
 
 const useStyles = createStyles((theme) => ({
   input: {
+    maxWidth: '770px',
+    width: '100%',
     input: {
+      border: `1px solid ${theme.colors.gray[1]}`,
       height: '48px',
       '&::placeholder': {
         color: theme.colors.gray[3],

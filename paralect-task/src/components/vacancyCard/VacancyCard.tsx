@@ -15,7 +15,7 @@ const useStyles = createStyles((theme) => ({
     width: '100%',
     maxWidth: 773,
     padding: 24,
-    border: `1px solid ${theme.colors.gray[3]}`,
+    border: `1px solid ${theme.colors.gray[1]}`,
     borderRadius: theme.radius.md,
   },
   link: {

@@ -36,7 +36,7 @@ export type SearchParams = {
   keyword?: string;
   payment_from?: string;
   payment_to?: string;
-  catalogues?: string;
+  catalogues?: number;
   published?: string;
 };
 
@@ -45,4 +45,14 @@ export type VacanciesResponse = {
   total: number;
   currentPage: number;
   totalPages: number;
+};
+
+export type CataloguesResponse = {
+  key: string;
+  title_trimmed: string;
+};
+
+export type SelectOption = {
+  key: string;
+  label: string;
 };
