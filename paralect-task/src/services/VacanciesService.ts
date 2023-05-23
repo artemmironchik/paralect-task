@@ -1,5 +1,5 @@
 import api from '../api/axios';
-import { SearchParams, VacanciesResponse } from '../types/types';
+import { SearchParams, VacanciesResponse, Vacancy } from '../types/types';
 
 export const getVacancies = async (params: SearchParams) => {
   const { data } = await api.get<VacanciesResponse>('/vacancies', { params });
@@ -9,4 +9,13 @@ export const getVacancies = async (params: SearchParams) => {
   data.totalPages = Math.ceil(data.total / Number(params.count));
 
   return data;
+};
+
+export const getVacancyById = async (id: number): Promise<Vacancy | null> => {
+  try {
+    const { data } = await api.get<Vacancy>(`/vacancies/${id}`);
+    return data;
+  } catch {
+    return null;
+  }
 };

@@ -1,5 +1,6 @@
 import { RouteObject, Navigate } from 'react-router-dom';
 import Main from './routes/main/Main';
+import Vacancy from './routes/vacancy/Vacancy';
 
 const routes: RouteObject[] = [
   {
@@ -10,10 +11,10 @@ const routes: RouteObject[] = [
     path: '/vacancies',
     element: <Main />,
   },
-  // {
-  //   path: '/vacancy/:id',
-  //   element: <Vacancy />,
-  // },
+  {
+    path: '/vacancies/:id',
+    element: <Vacancy />,
+  },
   // {
   //   path: '/favorites',
   //   element: <Favorites />,

@@ -9,7 +9,6 @@ const useStyles = createStyles((theme) => ({
   container: {
     backgroundColor: theme.white,
     maxWidth: 773,
-    width: '100%',
     maxHeight: 320,
     padding: 20,
     borderRadius: theme.radius.md,
@@ -17,6 +16,7 @@ const useStyles = createStyles((theme) => ({
 
     [theme.fn.smallerThan('lg')]: {
       alignSelf: 'center',
+      width: '100%',
     },
 
     [theme.fn.smallerThan('md')]: {

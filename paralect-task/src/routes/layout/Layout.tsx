@@ -1,4 +1,4 @@
-import { Container, createStyles } from '@mantine/core';
+import { createStyles } from '@mantine/core';
 import { Outlet } from 'react-router-dom';
 import { HeaderResponsive as Header } from '../../components/header/Header';
 
