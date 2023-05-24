@@ -7,6 +7,9 @@ const useStyles = createStyles((theme) => ({
   container: {
     paddingTop: '120px',
   },
+  text: {
+    lineHeight: '29px',
+  },
   button: {
     background: theme.colors.blue[5],
     color: theme.colors.blue[0],
@@ -39,9 +42,9 @@ export default function NotFound({ withButton }: NotFoundProps) {
 
   return (
     <Container size="md" className={classes.container}>
-      <Flex justify="space-between" align="center" direction="column">
+      <Flex direction="column" justify="space-between" align="center" gap={32}>
         <Image src={NotFoundImage} maw={240} />
-        <Text size={24} weight={700} py={32} align="center">
+        <Text className={classes.text} size={24} weight={700} align="center">
           Упс, здесь еще ничего нет!
         </Text>
         {withButton && (
