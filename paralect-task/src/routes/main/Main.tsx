@@ -126,10 +126,10 @@ export default function Main() {
 
     params.page = value - 1;
 
-    setSearchParams({
-      ...Object.fromEntries(searchParams),
-      ...params,
-    });
+    // setSearchParams({
+    //   ...Object.fromEntries(searchParams),
+    //   ...params,
+    // });
   };
 
   const handleApplyFilters = () => {
