@@ -1,3 +1,4 @@
+import { redirect } from 'react-router-dom';
 import api from '../api/axios';
 import { SearchParams, VacanciesResponse, Vacancy } from '../types/types';
 
@@ -13,7 +14,7 @@ export const getVacancies = async (params: SearchParams) => {
 
 export const getVacancyById = async (id: number): Promise<Vacancy | null> => {
   try {
-    const { data } = await api.get<Vacancy>(`/vacancies/${id}`);
+    const { data } = await api.get<Vacancy>(`/vacancies/${id}/`);
     return data;
   } catch {
     return null;

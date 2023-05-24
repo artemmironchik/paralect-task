@@ -19,10 +19,10 @@ const routes: RouteObject[] = [
   //   path: '/favorites',
   //   element: <Favorites />,
   // },
-  // {
-  //   path: '*',
-  //   element: <NotFound />,
-  // },
+  {
+    path: '*',
+    element: <Navigate to="/vacancies" />,
+  },
 ];
 
 export default routes;
