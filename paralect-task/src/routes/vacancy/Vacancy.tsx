@@ -61,6 +61,7 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan('sm')]: { display: 'none' },
   },
   description: {
+    padding: '24px',
     backgroundColor: theme.white,
     border: `1px solid ${theme.colors.gray[1]}`,
     borderRadius: theme.radius.md,
@@ -103,7 +104,7 @@ export default function DetailsPage() {
 
   return (
     <>
-      {isError && <Navigate to="../vacancies" />}
+      {isError && <Navigate to="/404" />}
       {!isError && vacancy && (
         <Flex
           className={classes.container}

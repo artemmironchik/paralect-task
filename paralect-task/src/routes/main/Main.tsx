@@ -19,6 +19,7 @@ const useStyles = createStyles((theme) => ({
   },
   itemsContainer: {
     paddingBottom: '40px',
+    flexGrow: 1,
   },
   control: {
     border: `1px solid ${theme.colors.gray[1]}`,

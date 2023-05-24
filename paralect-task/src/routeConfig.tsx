@@ -1,6 +1,7 @@
 import { RouteObject, Navigate } from 'react-router-dom';
 import Main from './routes/main/Main';
 import Vacancy from './routes/vacancy/Vacancy';
+import NotFound from './routes/404/NotFound';
 
 const routes: RouteObject[] = [
   {
@@ -20,8 +21,12 @@ const routes: RouteObject[] = [
   //   element: <Favorites />,
   // },
   {
+    path: '/404',
+    element: <NotFound withButton />,
+  },
+  {
     path: '*',
-    element: <Navigate to="/vacancies" />,
+    element: <Navigate to="/404" />,
   },
 ];
 

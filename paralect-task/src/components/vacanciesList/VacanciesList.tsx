@@ -1,6 +1,7 @@
 import { Flex, Loader, createStyles } from '@mantine/core';
 import VacancyCard from '../vacancyCard/VacancyCard';
 import { VacanciesResponse } from '../../types/types';
+import NotFound from '../../routes/404/NotFound';
 
 const useStyles = createStyles((theme) => ({
   flex: {
@@ -45,7 +46,7 @@ export default function VacanciesList({ page, isLoading }: VacanciesListProps) {
   return (
     <Flex className={classes.flex}>
       {isLoading && <Loader variant="dots" />}
-      {!isLoading && !page?.objects.length && <div>Not found</div>}
+      {!isLoading && !page?.objects.length && <NotFound />}
       {!isLoading &&
         !!page?.objects.length &&
         page?.objects.map((vacancy) => <VacancyCard key={vacancy.id} vacancy={vacancy} />)}

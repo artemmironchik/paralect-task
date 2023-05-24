@@ -26,5 +26,6 @@ module.exports = {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'import/prefer-default-export': 'off',
     'no-param-reassign': 0,
+    'react/require-default-props': 'off',
   },
 };
