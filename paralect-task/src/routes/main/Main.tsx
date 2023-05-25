@@ -5,13 +5,15 @@ import { useSearchParams } from 'react-router-dom';
 import SearchInput from '../../components/searchInput/SearchInput';
 import VacanciesList from '../../components/vacanciesList/VacanciesList';
 import { getVacancies } from '../../services/VacanciesService';
-import { VacanciesResponse } from '../../types/types';
+import { VacanciesResponse, Vacancy } from '../../types/types';
 import Filters from '../../components/filters/Filters';
+import { addFavorite, removeFavorite } from '../../services/FavoritesService';
 
 const useStyles = createStyles((theme) => ({
   container: {
     paddingTop: '40px',
     maxWidth: '71.25rem',
+    flexGrow: 1,
 
     [theme.fn.smallerThan('lg')]: {
       flexDirection: 'column',
@@ -116,6 +118,10 @@ export default function Main() {
   const handlePaymentToValue = (value: number) => {
     setCurrentPaymentTo(value || undefined);
   };
+  const handleIconClick = (vacancy: Vacancy) => {
+    if (vacancy.favorite) removeFavorite(vacancy);
+    else addFavorite(vacancy);
+  };
 
   const handleClickPage = (value: number) => {
     const params: {
@@ -195,7 +201,11 @@ export default function Main() {
           handleSearchValue={handleSearchValue}
           handleSearch={handleSearch}
         />
-        <VacanciesList page={page} isLoading={isLoading} />
+        <VacanciesList
+          page={page.objects}
+          isLoading={isLoading}
+          handleIconClick={handleIconClick}
+        />
         {!isLoading && (
           <Pagination
             total={page.totalPages || 0}
