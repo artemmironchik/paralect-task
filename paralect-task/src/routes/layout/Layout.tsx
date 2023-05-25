@@ -7,12 +7,17 @@ const useStyles = createStyles((theme) => ({
     background: theme.colors.gray[0],
     minHeight: '100vh',
     width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
   },
   container: {
     padding: '0 1rem',
     maxWidth: '70rem',
+    width: '100%',
+    display: 'flex',
     marginLeft: 'auto',
     marginRight: 'auto',
+    flexGrow: 1,
   },
 }));
 

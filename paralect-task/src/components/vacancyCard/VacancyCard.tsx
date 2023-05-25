@@ -7,6 +7,7 @@ import Star from '../svg/star/Star';
 
 type VacancyProps = {
   vacancy: Vacancy;
+  handleIconClick: (vacancy: Vacancy) => void;
 };
 
 const useStyles = createStyles((theme) => ({
@@ -39,7 +40,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function VacancyCard({ vacancy }: VacancyProps) {
+export default function VacancyCard({ vacancy, handleIconClick }: VacancyProps) {
   const { classes } = useStyles();
   const payment = getPayment(vacancy);
 
@@ -51,12 +52,12 @@ export default function VacancyCard({ vacancy }: VacancyProps) {
       direction="column"
     >
       <Flex w="100%" justify="space-between" align="center">
-        <NavLink to={`${vacancy.id}`} className={classes.link}>
+        <NavLink to={`/vacancies/${vacancy.id}`} className={classes.link}>
           <Text className={classes.title} fw={600}>
             {vacancy.profession}
           </Text>
         </NavLink>
-        <Star vacancy={vacancy} />
+        <Star vacancy={vacancy} handleIconClick={handleIconClick} />
       </Flex>
       <Flex className={classes.paymentContainer} gap={12} align="center">
         <Text className={classes.paymentText} fw={600} fz="sm">

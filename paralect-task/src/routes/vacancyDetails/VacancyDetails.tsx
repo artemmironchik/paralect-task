@@ -7,6 +7,7 @@ import Star from '../../components/svg/star/Star';
 import { getVacancyById } from '../../services/VacanciesService';
 import { Vacancy } from '../../types/types';
 import { getPayment } from '../../utils/getPayment';
+import { addFavorite, removeFavorite } from '../../services/FavoritesService';
 
 const emptyVacancy = {
   id: '',
@@ -74,7 +75,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function DetailsPage() {
+export default function VacancyDetails() {
   const { id } = useParams();
   const { classes } = useStyles();
   const [vacancy, setVacancy] = useState<Vacancy | null>(emptyVacancy);
@@ -99,6 +100,11 @@ export default function DetailsPage() {
 
     getVacancy();
   }, [id]);
+
+  const handleIconClick = (vac: Vacancy) => {
+    if (vac.favorite) removeFavorite(vac);
+    else addFavorite(vac);
+  };
 
   const payment = vacancy ? getPayment(vacancy) : '';
 
@@ -126,7 +132,7 @@ export default function DetailsPage() {
                   <Text className={classes.title} fw={700}>
                     {vacancy.profession}
                   </Text>
-                  <Star vacancy={vacancy} />
+                  <Star vacancy={vacancy} handleIconClick={handleIconClick} />
                 </Flex>
                 <Flex className={classes.paymentContainer} gap={12} align="center">
                   <Text className={classes.paymentText} fw={700} fz="sm">

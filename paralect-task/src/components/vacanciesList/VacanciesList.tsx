@@ -1,6 +1,6 @@
 import { Flex, Loader, createStyles } from '@mantine/core';
 import VacancyCard from '../vacancyCard/VacancyCard';
-import { VacanciesResponse } from '../../types/types';
+import { Vacancy } from '../../types/types';
 import NotFound from '../../routes/404/NotFound';
 
 const useStyles = createStyles((theme) => ({
@@ -36,20 +36,24 @@ const useStyles = createStyles((theme) => ({
 }));
 
 type VacanciesListProps = {
-  page: VacanciesResponse | null;
-  isLoading: boolean;
+  page: Vacancy[] | null;
+  isLoading?: boolean;
+  handleIconClick: (vacancy: Vacancy) => void;
 };
 
-export default function VacanciesList({ page, isLoading }: VacanciesListProps) {
+export default function VacanciesList({ page, isLoading, handleIconClick }: VacanciesListProps) {
   const { classes } = useStyles();
 
   return (
     <Flex className={classes.flex}>
       {isLoading && <Loader variant="dots" />}
-      {!isLoading && !page?.objects.length && <NotFound />}
+      {!isLoading && page && !page.length && <NotFound />}
       {!isLoading &&
-        !!page?.objects.length &&
-        page?.objects.map((vacancy) => <VacancyCard key={vacancy.id} vacancy={vacancy} />)}
+        page &&
+        !!page.length &&
+        page.map((vacancy) => (
+          <VacancyCard key={vacancy.id} vacancy={vacancy} handleIconClick={handleIconClick} />
+        ))}
     </Flex>
   );
 }
