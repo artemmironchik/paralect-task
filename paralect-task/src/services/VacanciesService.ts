@@ -21,6 +21,9 @@ export const getVacancies = async (params: SearchParams) => {
 export const getVacancyById = async (id: number): Promise<Vacancy | null> => {
   try {
     const { data } = await api.get<Vacancy>(`/vacancies/${id}/`);
+    const favorites = getFavorites();
+
+    data.favorite = favorites.some((item: Vacancy) => item.id === data.id);
     return data;
   } catch {
     return null;
