@@ -48,7 +48,7 @@ export type VacanciesResponse = {
 };
 
 export type CataloguesResponse = {
-  key: string;
+  key: number;
   title_trimmed: string;
 };
 

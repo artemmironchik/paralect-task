@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 import { Flex, Pagination, createStyles } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -50,9 +49,9 @@ export default function Main() {
 
   const [searchValue, setSearchValue] = useState(localStorage.getItem('keyword') || '');
   const [currentValue, setCurrentValue] = useState(localStorage.getItem('keyword') || '');
-  const [catalogue, setCatalogue] = useState(localStorage.getItem('catalogue') || null);
+  const [catalogue, setCatalogue] = useState(Number(localStorage.getItem('catalogue')) || null);
   const [currentCatalogue, setCurrentCatalogue] = useState(
-    localStorage.getItem('catalogue') || null
+    Number(localStorage.getItem('catalogue')) || null
   );
   const [paymentFrom, setPaymentFrom] = useState(
     Number(localStorage.getItem('paymentFrom')) || undefined
@@ -110,7 +109,7 @@ export default function Main() {
     setCurrentValue(value);
   };
   const handleSelectValue = (value: string) => {
-    setCurrentCatalogue(value || null);
+    setCurrentCatalogue(Number(value) || null);
   };
   const handlePaymentFromValue = (value: number) => {
     setCurrentPaymentFrom(value || undefined);
@@ -148,12 +147,12 @@ export default function Main() {
     setPaymentFrom(currentPaymentFrom);
     setPaymentTo(currentPaymentTo);
 
-    localStorage.setItem('catalogue', JSON.stringify(catalogue));
-    localStorage.setItem('paymentFrom', JSON.stringify(paymentFrom));
-    localStorage.setItem('paymentTo', JSON.stringify(paymentTo));
+    localStorage.setItem('catalogue', JSON.stringify(currentCatalogue));
+    localStorage.setItem('paymentFrom', JSON.stringify(currentPaymentFrom));
+    localStorage.setItem('paymentTo', JSON.stringify(currentPaymentTo));
     localStorage.setItem('page', '1');
 
-    if (currentCatalogue) params.catalogues = currentCatalogue;
+    if (currentCatalogue) params.catalogues = String(currentCatalogue);
     else searchParams.delete('catalogues');
 
     if (currentPaymentFrom) params.payment_from = String(currentPaymentFrom);

@@ -9,20 +9,17 @@ const useStyles = createStyles((theme) => ({
   container: {
     backgroundColor: theme.white,
     maxWidth: 773,
-    maxHeight: 320,
+    maxHeight: 368,
     padding: 20,
     borderRadius: theme.radius.md,
     border: `1px solid ${theme.colors.gray[1]}`,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '20px',
 
     [theme.fn.smallerThan('lg')]: {
       alignSelf: 'center',
       width: '100%',
-    },
-
-    [theme.fn.smallerThan('md')]: {
-      width: '100%',
-      flexDirection: 'column',
-      alignItems: 'center',
     },
   },
   clearBtn: {
@@ -46,6 +43,15 @@ const useStyles = createStyles((theme) => ({
         stroke: theme.colors.blue[1],
       },
     },
+  },
+  label: {
+    fontSize: '16px',
+    lineHeight: '19px',
+  },
+  inputContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
   },
   select: {
     width: '100%',
@@ -108,7 +114,7 @@ type FiltersProps = {
     handlePaymentToValue: (value: number) => void;
   };
   values: {
-    currentCatalogue: string | null;
+    currentCatalogue: number | null;
     currentPaymentFrom: number | undefined;
     currentPaymentTo: number | undefined;
   };
@@ -133,10 +139,11 @@ export default function Filters({ handlers, values }: FiltersProps) {
     };
     getOptions();
   }, []);
+
   return (
     <Box className={classes.container}>
-      <Flex justify="space-between" align="center" gap={32}>
-        <Text fw={600}>Фильтры</Text>
+      <Flex justify="space-between" align="center">
+        <Text fw={700}>Фильтры</Text>
         <Button
           className={classes.clearBtn}
           rightIcon={<ClearBtn />}
@@ -147,53 +154,62 @@ export default function Filters({ handlers, values }: FiltersProps) {
         </Button>
       </Flex>
       <Flex direction="column" gap={20}>
-        <Text />
-        <Select
-          data-elem="industry-select"
-          className={classes.select}
-          data={catalogues.map((item) => ({
-            value: item.key,
-            label: item.title_trimmed,
-          }))}
-          value={currentCatalogue}
-          placeholder="Выберите отрасль"
-          rightSection={<Arrow />}
-          rightSectionWidth={50}
-          styles={{
-            rightSection: {
-              pointerEvents: 'none',
-              transform: `${isOpen ? 'rotate(-180deg)' : ''}`,
-              marginBottom: `${isOpen ? '2px' : ''}`,
-              path: { stroke: `${isOpen ? '#5E96FC' : ''}` },
-            },
-            item: {
-              '&[data-hovered]': { background: '#DEECFF' },
-              '&[data-selected]': { background: '#5E96FC' },
-            },
-          }}
-          onDropdownOpen={() => setIsOpen(true)}
-          onDropdownClose={() => setIsOpen(false)}
-          onChange={handleSelectValue}
-        />
-        <NumberInput
-          data-elem="salary-from-input"
-          classNames={{ control: classes.control, input: classes.numberInput }}
-          rightSectionWidth={35}
-          placeholder="От"
-          value={currentPaymentFrom || ''}
-          min={0}
-          max={currentPaymentTo || undefined}
-          onChange={handlePaymentFromValue}
-        />
-        <NumberInput
-          data-elem="salary-from-input"
-          classNames={{ control: classes.control, input: classes.numberInput }}
-          rightSectionWidth={35}
-          placeholder="До"
-          value={currentPaymentTo || ''}
-          min={currentPaymentFrom || 0}
-          onChange={handlePaymentToValue}
-        />
+        <Box className={classes.inputContainer}>
+          <Text className={classes.label} fw={700}>
+            Отрасль
+          </Text>
+          <Select
+            data-elem="industry-select"
+            className={classes.select}
+            data={catalogues.map((item) => ({
+              value: String(item.key),
+              label: item.title_trimmed,
+            }))}
+            value={String(currentCatalogue)}
+            placeholder="Выберите отрасль"
+            rightSection={<Arrow />}
+            rightSectionWidth={50}
+            styles={{
+              rightSection: {
+                pointerEvents: 'none',
+                transform: `${isOpen ? 'rotate(-180deg)' : ''}`,
+                marginBottom: `${isOpen ? '2px' : ''}`,
+                path: { stroke: `${isOpen ? '#5E96FC' : ''}` },
+              },
+              item: {
+                '&[data-hovered]': { background: '#DEECFF' },
+                '&[data-selected]': { background: '#5E96FC' },
+              },
+            }}
+            onDropdownOpen={() => setIsOpen(true)}
+            onDropdownClose={() => setIsOpen(false)}
+            onChange={handleSelectValue}
+          />
+        </Box>
+        <Box className={classes.inputContainer}>
+          <Text className={classes.label} fw={700}>
+            Оклад
+          </Text>
+          <NumberInput
+            data-elem="salary-from-input"
+            classNames={{ control: classes.control, input: classes.numberInput }}
+            rightSectionWidth={35}
+            placeholder="От"
+            value={currentPaymentFrom || ''}
+            min={0}
+            max={currentPaymentTo || undefined}
+            onChange={handlePaymentFromValue}
+          />
+          <NumberInput
+            data-elem="salary-from-input"
+            classNames={{ control: classes.control, input: classes.numberInput }}
+            rightSectionWidth={35}
+            placeholder="До"
+            value={currentPaymentTo || ''}
+            min={currentPaymentFrom || 0}
+            onChange={handlePaymentToValue}
+          />
+        </Box>
         <Button className={classes.applyBtn} onClick={handleApplyFilters}>
           Применить
         </Button>
