@@ -6,7 +6,7 @@ To check this project visit [https://paralect-task-khaki.vercel.app/](https://pa
 
 ## Preview
 
-![Desktop Preview, Main Page]![image](https://github.com/artemmironchik/paralect-task/assets/88584357/0c5f9003-e161-4802-b8b2-9fb38e94293f)
+![Desktop Preview, Main Page](https://github.com/artemmironchik/paralect-task/src/assets/preview1.png)
 
 ## Technologies
 
