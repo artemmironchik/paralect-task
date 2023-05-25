@@ -102,7 +102,7 @@ export default function Main() {
     setSearchParams({
       ...Object.fromEntries(searchParams),
       ...params,
-      page: '0',
+      page: '1',
     });
   };
 
@@ -125,17 +125,17 @@ export default function Main() {
 
   const handleClickPage = (value: number) => {
     const params: {
-      page?: number;
+      page?: string;
     } = {};
     localStorage.setItem('page', `${value}`);
     setPageNum(value);
 
-    params.page = value - 1;
+    params.page = String(value);
 
-    // setSearchParams({
-    //   ...Object.fromEntries(searchParams),
-    //   ...params,
-    // });
+    setSearchParams({
+      ...Object.fromEntries(searchParams),
+      ...params,
+    });
   };
 
   const handleApplyFilters = () => {
@@ -170,15 +170,22 @@ export default function Main() {
   };
   const handleClearFilters = () => {
     setSearchValue('');
+    setCurrentValue('');
     setCatalogue(null);
+    setCurrentCatalogue(null);
     setPaymentFrom(undefined);
+    setCurrentPaymentFrom(undefined);
     setPaymentTo(undefined);
+    setCurrentPaymentTo(undefined);
     setPageNum(1);
     localStorage.setItem('keyword', '');
     localStorage.setItem('page', '1');
     localStorage.setItem('catalogue', JSON.stringify(null));
     localStorage.setItem('paymentFrom', JSON.stringify(undefined));
     localStorage.setItem('paymentTo', JSON.stringify(undefined));
+    setSearchParams({
+      page: '1',
+    });
   };
   const handlers = {
     handleClearFilters,
