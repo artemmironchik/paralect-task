@@ -74,7 +74,7 @@ export default function SearchInput({ value, handleSearchValue, handleSearch }: 
         </Button>
       }
       rightSectionWidth={100}
-      defaultValue={value}
+      value={value}
       placeholder="Введите название вакансии"
       onChange={handleChange}
       onKeyDown={handleKeyDown}

@@ -161,6 +161,7 @@ export default function Filters({ handlers, values }: FiltersProps) {
           rightSectionWidth={50}
           styles={{
             rightSection: {
+              pointerEvents: 'none',
               transform: `${isOpen ? 'rotate(-180deg)' : ''}`,
               marginBottom: `${isOpen ? '2px' : ''}`,
               path: { stroke: `${isOpen ? '#5E96FC' : ''}` },
@@ -179,8 +180,9 @@ export default function Filters({ handlers, values }: FiltersProps) {
           classNames={{ control: classes.control, input: classes.numberInput }}
           rightSectionWidth={35}
           placeholder="От"
+          value={currentPaymentFrom || ''}
           min={0}
-          max={Number(currentPaymentTo) || undefined}
+          max={currentPaymentTo || undefined}
           onChange={handlePaymentFromValue}
         />
         <NumberInput
@@ -188,7 +190,8 @@ export default function Filters({ handlers, values }: FiltersProps) {
           classNames={{ control: classes.control, input: classes.numberInput }}
           rightSectionWidth={35}
           placeholder="До"
-          min={Number(currentPaymentFrom) || 0}
+          value={currentPaymentTo || ''}
+          min={currentPaymentFrom || 0}
           onChange={handlePaymentToValue}
         />
         <Button className={classes.applyBtn} onClick={handleApplyFilters}>
