@@ -86,25 +86,6 @@ export default function Main() {
     getPage();
   }, [catalogue, pageNum, paymentFrom, paymentTo, searchValue]);
 
-  const handleSearch = () => {
-    const params: {
-      keyword?: string;
-    } = {};
-    setSearchValue(currentValue);
-    setPageNum(1);
-    localStorage.setItem('keyword', currentValue);
-    localStorage.setItem('page', '1');
-
-    if (currentValue) params.keyword = currentValue;
-    else searchParams.delete('keyword');
-
-    setSearchParams({
-      ...Object.fromEntries(searchParams),
-      ...params,
-      page: '1',
-    });
-  };
-
   const handleSearchValue = (value: string) => {
     setCurrentValue(value);
   };
@@ -142,15 +123,22 @@ export default function Main() {
       catalogues?: string;
       payment_from?: string;
       payment_to?: string;
+      keyword?: string;
     } = {};
+    setSearchValue(currentValue);
+    setPageNum(1);
     setCatalogue(currentCatalogue);
     setPaymentFrom(currentPaymentFrom);
     setPaymentTo(currentPaymentTo);
 
+    localStorage.setItem('keyword', currentValue);
     localStorage.setItem('catalogue', JSON.stringify(currentCatalogue));
     localStorage.setItem('paymentFrom', JSON.stringify(currentPaymentFrom));
     localStorage.setItem('paymentTo', JSON.stringify(currentPaymentTo));
     localStorage.setItem('page', '1');
+
+    if (currentValue) params.keyword = currentValue;
+    else searchParams.delete('keyword');
 
     if (currentCatalogue) params.catalogues = String(currentCatalogue);
     else searchParams.delete('catalogues');
@@ -164,7 +152,7 @@ export default function Main() {
     setSearchParams({
       ...Object.fromEntries(searchParams),
       ...params,
-      page: '0',
+      page: '1',
     });
   };
   const handleClearFilters = () => {
@@ -205,7 +193,7 @@ export default function Main() {
         <SearchInput
           value={currentValue}
           handleSearchValue={handleSearchValue}
-          handleSearch={handleSearch}
+          handleSearch={handleApplyFilters}
         />
         <VacanciesList
           page={page.objects}
