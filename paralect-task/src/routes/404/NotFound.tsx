@@ -1,4 +1,4 @@
-import { Container, Image, Text, Button, Flex, createStyles } from '@mantine/core';
+import { Button, Container, Flex, Image, Text, createStyles } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 
 import NotFoundImage from '../../assets/NotFound.svg';

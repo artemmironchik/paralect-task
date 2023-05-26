@@ -1,9 +1,9 @@
 import { Flex, Pagination, createStyles } from '@mantine/core';
-import { useState, useEffect } from 'react';
-import { Vacancy } from '../../types/types';
-import { addFavorite, getFavorites, removeFavorite } from '../../services/FavoritesService';
-import NotFound from '../404/NotFound';
+import { useEffect, useState } from 'react';
 import VacanciesList from '../../components/vacanciesList/VacanciesList';
+import { addFavorite, getFavorites, removeFavorite } from '../../services/FavoritesService';
+import { Vacancy } from '../../types/types';
+import NotFound from '../404/NotFound';
 
 const useStyles = createStyles((theme) => ({
   container: {

@@ -50,6 +50,11 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
+  logoLink: {
+    color: 'inherit',
+    textDecoration: 'none',
+  },
+
   logoContainer: {
     display: 'flex',
     justifyContent: 'initial',
@@ -60,8 +65,6 @@ const useStyles = createStyles((theme) => ({
       marginRight: '0',
     },
   },
-
-  logoImg: {},
 
   logoName: {
     fontFamily: 'poppins',
@@ -123,10 +126,12 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
   return (
     <Header className={classes.root} height={85}>
       <Container className={classes.header}>
-        <Flex className={classes.logoContainer} gap="sm">
-          <Image src={logo} className={classes.logoImg} />
-          <Text className={classes.logoName}>Jobored</Text>
-        </Flex>
+        <NavLink to="../vacancies" className={classes.logoLink}>
+          <Flex className={classes.logoContainer} gap="sm">
+            <Image src={logo} />
+            <Text className={classes.logoName}>Jobored</Text>
+          </Flex>
+        </NavLink>
         <Group className={classes.links}>{items}</Group>
 
         <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />

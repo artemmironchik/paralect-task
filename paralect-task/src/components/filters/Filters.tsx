@@ -1,9 +1,9 @@
 import { Box, Button, Flex, NumberInput, Select, Text, createStyles } from '@mantine/core';
 import { useEffect, useState } from 'react';
-import ClearBtn from '../svg/close/ClearBtn';
 import { getCatalogues } from '../../services/CataloguesService';
 import { CataloguesResponse } from '../../types/types';
 import Arrow from '../svg/arrow/Arrow';
+import ClearBtn from '../svg/close/ClearBtn';
 
 const useStyles = createStyles((theme) => ({
   container: {

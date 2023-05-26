@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import location from '../../assets/icons/Location.svg';
 import Star from '../../components/svg/star/Star';
+import { addFavorite, removeFavorite } from '../../services/FavoritesService';
 import { getVacancyById } from '../../services/VacanciesService';
 import { Vacancy } from '../../types/types';
 import { getPayment } from '../../utils/getPayment';
-import { addFavorite, removeFavorite } from '../../services/FavoritesService';
 
 const emptyVacancy = {
   id: '',
