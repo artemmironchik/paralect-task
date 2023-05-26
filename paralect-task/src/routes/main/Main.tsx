@@ -1,12 +1,12 @@
 import { Flex, Pagination, createStyles } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import Filters from '../../components/filters/Filters';
 import SearchInput from '../../components/searchInput/SearchInput';
 import VacanciesList from '../../components/vacanciesList/VacanciesList';
+import { addFavorite, removeFavorite } from '../../services/FavoritesService';
 import { getVacancies } from '../../services/VacanciesService';
 import { VacanciesResponse, Vacancy } from '../../types/types';
-import Filters from '../../components/filters/Filters';
-import { addFavorite, removeFavorite } from '../../services/FavoritesService';
 
 const useStyles = createStyles((theme) => ({
   container: {
